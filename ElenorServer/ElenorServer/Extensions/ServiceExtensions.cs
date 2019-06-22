@@ -27,6 +27,14 @@ namespace ElenorServer.Extensions
                     .AllowCredentials());
             });
         }
+
+        public static void ConfigureIISIntegration(this IServiceCollection services)
+        {
+            services.Configure<IISOptions>(options =>
+            {
+
+            });
+        }
     }
 }
 
