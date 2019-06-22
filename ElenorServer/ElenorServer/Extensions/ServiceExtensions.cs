@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using LoggerService;
 using Contracts;
 using Microsoft.EntityFrameworkCore;
-using Entities;
-using Repository;
+//using Entities;
+//using Repository;
 
 namespace ElenorServer.Extensions
 {
@@ -34,6 +34,11 @@ namespace ElenorServer.Extensions
             {
 
             });
+        }
+
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
         }
     }
 }

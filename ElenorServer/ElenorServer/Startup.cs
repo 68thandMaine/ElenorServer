@@ -32,6 +32,8 @@ namespace ElenorServer
 
             services.ConfigureIISIntegration();
 
+            services.ConfigureLoggerService();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -49,6 +51,13 @@ namespace ElenorServer
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
