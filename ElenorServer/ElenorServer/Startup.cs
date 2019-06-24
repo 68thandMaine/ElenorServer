@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-//using NLog;
+using NLog;
 using System.IO;
 using ElenorServer.Extensions;
 
@@ -20,6 +20,8 @@ namespace ElenorServer
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
             Configuration = configuration;
         }
 
@@ -33,6 +35,10 @@ namespace ElenorServer
             services.ConfigureIISIntegration();
 
             services.ConfigureLoggerService();
+
+            services.ConfigureMySqlContext(Configuration);
+
+            services.ConfigureRepositoryWrapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
