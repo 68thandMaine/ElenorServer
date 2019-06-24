@@ -68,5 +68,31 @@ namespace ElenorServer.Controllers
                 return StatusCode(509, "Internal server error.");
             }
         }
+
+        [HttpGet("{id}", Name = "MessageById")]
+        public IActionResult GetMessageById(Guid id)
+        {
+            try
+            {
+                var message = _repository.Messages.GetMessageById(id);
+
+                if (message.Id.Equals(Guid.Empty))
+                {
+                    _logger.LogError($"Message with id: {id}, has not been found in the database.");
+                    return NotFound();
+                }
+
+                else
+                {
+                    _logger.LogInfo($"Returned message with id: {id}");
+                    return Ok(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside the GetMessageById action: {ex.Message}.");
+                return StatusCode(500, "Internal server error.");
+            }
+        }
     }
 }

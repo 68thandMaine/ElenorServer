@@ -55,6 +55,16 @@ I created a repository wrapper. (6/23)
 
 - I tested the POST and GET method for creating a message and getting all messages in Postman. (6/24)
 
+- I added the project ***ElenorServer.Tests*** and created a test for the *MessagesController.cs* file. (6/24)
+
+- I created a `GetMessageById()` method. (6/24)  
+  <sup>Tested in PostMan</sup>
+
+  - Created name in ***Contracts*** / *IMessagesRepository.cs*.
+  - Created the method in ***Repository*** / *MessagesRepository.cs*.
+  - Created the controller action in ***ElenorServer*** / **Controllers** / *MessagesController.cs*.
+
+
 ___
 
 ### Extension Methods

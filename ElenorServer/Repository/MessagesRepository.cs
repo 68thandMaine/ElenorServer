@@ -23,5 +23,12 @@ namespace Repository
             message.Id = Guid.NewGuid();
             Create(message);
         }
+
+        public Messages GetMessageById(Guid Id)
+        {
+            return FindByCondition(message => message.Id.Equals(Id))
+                .DefaultIfEmpty(new Messages())
+                .FirstOrDefault();
+        }
     }
 }
