@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{966ADC31-72E6-410C-ABEB-3734E2EC6487}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElenorServer.Tests", "ElenorServer.Tests\ElenorServer.Tests.csproj", "{B04C3226-AF72-4DE5-ADCA-AF06A6F8879D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{966ADC31-72E6-410C-ABEB-3734E2EC6487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{966ADC31-72E6-410C-ABEB-3734E2EC6487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{966ADC31-72E6-410C-ABEB-3734E2EC6487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04C3226-AF72-4DE5-ADCA-AF06A6F8879D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04C3226-AF72-4DE5-ADCA-AF06A6F8879D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04C3226-AF72-4DE5-ADCA-AF06A6F8879D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04C3226-AF72-4DE5-ADCA-AF06A6F8879D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
