@@ -65,7 +65,7 @@ namespace ElenorServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetAllMessages action: {ex.Message}.");
-                return StatusCode(509, "Internal server error.");
+                return StatusCode(500, "Internal server error.");
             }
         }
 

@@ -13,7 +13,7 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        public IEnumerable<Messages> GetAllMessages()
+        public List<Messages> GetAllMessages()
         {
             return FindAll().ToList();
         }
@@ -30,5 +30,6 @@ namespace Repository
                 .DefaultIfEmpty(new Messages())
                 .FirstOrDefault();
         }
+
     }
 }

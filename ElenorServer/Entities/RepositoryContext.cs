@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 namespace Entities
 {
     public class RepositoryContext : DbContext
