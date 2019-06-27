@@ -21,7 +21,7 @@ namespace ElenorServer.Extensions
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:8080")
+                    builder => builder.AllowAnyOrigin()
                     .WithMethods("GET", "PUT", "POST", "DELETE")
                     .AllowAnyHeader()
                     .AllowCredentials());

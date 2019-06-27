@@ -29,7 +29,7 @@ namespace Entities.Models
         [StringLength(1500, ErrorMessage = "There can only be 1500 characters in a message.")]
         public string Message { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public String CreatedAt { get; set; }
 
         public bool Opened { get; set; }
 
