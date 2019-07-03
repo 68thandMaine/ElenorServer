@@ -1,8 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
 using Entities.Models;
 using ElenorServer.Controllers;
 using Repository;
 using System;
+using Entities;
 using System.Collections.Generic;
 using Contracts;
 
@@ -10,31 +13,26 @@ using Contracts;
 namespace ElenorServer.Tests
 {
     [TestClass]
-    public class MessagesTest : IDisposable
+    public class MessagesTest
     {
         private IRepositoryWrapper _repository;
 
+        public MessagesTest(IRepositoryWrapper repository)
+        {
+            _repository = repository;
+        }
 
-        public void Dispose()
-        {
-            _repository.Messages.ClearAll("Messages");
-        }
-        [TestInitialize]
-        public void Initalize()
-        {
-            _repository = new RepositoryWrapper();
-        }
         [TestMethod]
         public void GetAllMessages_ReturnsEmptyList()
         {
             // Arrange
-            List<Messages> newList = new List<Messages> { };
-
+            MessagesController controller = new MessagesController();
+            List<Messages> emptyList = new List<Messages> { };
             // Act
-            List<Messages> result = _repository.Messages.GetAllMessages();
+            List<Messages> messageList = _repository.Messages.GetAllMessages();
 
             // Assert
-            Assert.AreEqual(newList.Count, result.Count);
+            Assert.AreEqual(emptyList, messageList);
         }
 
         //[TestMethod]

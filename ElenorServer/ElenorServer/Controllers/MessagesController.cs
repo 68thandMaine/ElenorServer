@@ -49,12 +49,12 @@ namespace ElenorServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside CreateMessage action: {ex.Message}.");
-                return StatusCode(500, "Internal server erro.r");
+                return StatusCode(500, "Internal server error");
             }
         }
 
         [HttpGet]
-        public IActionResult GetAllMessages()
+        public ActionResult GetAllMessages()
         {
             try
             {

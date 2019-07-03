@@ -18,4 +18,8 @@
   <ItemGroup>
     <Folder Include="ControllerTests\" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" />
+  </ItemGroup>
 </Project>

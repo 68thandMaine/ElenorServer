@@ -11,6 +11,12 @@ namespace Entities
         {
         }
 
-        public DbSet<Messages> Messages { get; set; }
+        //Used for testing
+        public RepositoryContext()
+        {
+
+        }
+
+        public virtual DbSet<Messages> Messages { get; set; }
     }
 }
