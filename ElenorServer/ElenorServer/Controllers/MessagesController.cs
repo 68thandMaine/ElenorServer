@@ -94,5 +94,27 @@ namespace ElenorServer.Controllers
                 return StatusCode(500, "Internal server error.");
             }
         }
+
+        [HttpDelete{"{id}"]
+        public IActionResult DeleteMessage(Guid id)
+        {
+            try
+            {
+                var message = _repository.Messages.GetMessageById(id);
+                if (message.IsEmptyObject())
+                {
+                    _logger.LogError($"Message with id {id}, has not been found in the database");
+                    return NotFound();
+                }
+                _repository.Messages.DeleteMessage(message);
+                _repository.Save();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteMessage action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

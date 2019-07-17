@@ -10,6 +10,7 @@ namespace Contracts
         Messages GetMessageById(Guid messageId);
         void CreateMessage(Messages message);
         //void UpdateMessage(Messages dbMessage, Messages message);
-        //void DeleteMessage(Messages message);
+        //void DeleteMessages(Messages messagesArray)
+        void DeleteMessage(Messages message);
     }
 }

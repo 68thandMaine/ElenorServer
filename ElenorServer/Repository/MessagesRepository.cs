@@ -31,5 +31,10 @@ namespace Repository
                 .FirstOrDefault();
         }
 
+        public void DeleteMessage(Messages message)
+        {
+            Delete(message);
+        }
+
     }
 }
