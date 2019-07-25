@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("messages")]
-    public class Messages
+    [Table("Message")]
+    public class Message
     {
         [Key]
         [Column("Id")]
@@ -27,9 +27,9 @@ namespace Entities.Models
 
         [Required(ErrorMessage = "The message field is required.")]
         [StringLength(1500, ErrorMessage = "There can only be 1500 characters in a message.")]
-        public string Message { get; set; }
+        public string Note { get; set; }
 
-        public String CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         public bool Opened { get; set; }
 

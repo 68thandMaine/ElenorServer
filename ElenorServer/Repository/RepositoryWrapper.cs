@@ -7,17 +7,17 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private RepositoryContext _repoContext;
-        private IMessagesRepository _messages;
+        private IMessageRepository _Message;
 
-        public IMessagesRepository Messages
+        public IMessageRepository Message
         {
             get
             {
-                if (_messages == null)
+                if (_Message == null)
                 {
-                    _messages = new MessagesRepository(_repoContext);
+                    _Message = new MessageRepository(_repoContext);
                 }
-                return _messages;
+                return _Message;
             }
         }
 

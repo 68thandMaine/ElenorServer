@@ -3,7 +3,7 @@ namespace Contracts
 {
     public interface IRepositoryWrapper
     {
-        IMessagesRepository Messages { get; }
+        IMessageRepository Message { get; }
 
         void Save();
     }

@@ -17,6 +17,6 @@ namespace Entities
 
         }
 
-        public virtual DbSet<Messages> Messages { get; set; }
+        public virtual DbSet<Message> Message { get; set; } // The implementation of a virtual member can be changed by an overriding memeber in a derived class.
     }
 }

@@ -7,31 +7,31 @@ using Entities.Models;
 
 namespace Repository
 {
-    public class MessagesRepository : RepositoryBase<Messages>, IMessagesRepository
+    public class MessageRepository : RepositoryBase<Message>, IMessageRepository
     {
-        public MessagesRepository(RepositoryContext repositoryContext)
+        public MessageRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
         }
-        public List<Messages> GetAllMessages()
+        public List<Message> GetAllMessages()
         {
             return FindAll().ToList();
         }
 
-        public void CreateMessage(Messages message)
+        public void CreateMessage(Message message)
         {
             message.Id = Guid.NewGuid();
             Create(message);
         }
 
-        public Messages GetMessageById(Guid Id)
+        public Message GetMessageById(Guid Id)
         {
             return FindByCondition(message => message.Id.Equals(Id))
-                .DefaultIfEmpty(new Messages())
+                .DefaultIfEmpty(new Message())
                 .FirstOrDefault();
         }
 
-        public void DeleteMessage(Messages message)
+        public void DeleteMessage(Message message)
         {
             Delete(message);
         }

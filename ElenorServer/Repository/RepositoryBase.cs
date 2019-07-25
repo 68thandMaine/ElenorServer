@@ -4,6 +4,7 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Expressions;
+using Remotion.Linq.Utilities;
 
 namespace Repository
 {
@@ -45,6 +46,10 @@ namespace Repository
         {
             this.RepositoryContext.Set<T>().FromSql("REMOVE FROM @tableName", tableName);
         }
+
+        /**
+         *Need to have a function for override equals?
+         */
 
     }
 }
