@@ -21,12 +21,8 @@ namespace ElenorServer.Controllers
 
         public MessageController(ILoggerManager logger, IRepositoryWrapper repository)
         {
-            if (repository != null)
-            {
-                this._logger = logger;
-                this._repository = repository;
-            }
-
+            this._logger = logger;
+            this._repository = repository;
         }
 
         [HttpPost]
@@ -65,7 +61,7 @@ namespace ElenorServer.Controllers
             {
                 var Messages = _repository.Message.GetAllMessages();
                 _logger.LogInfo($"Returned all Message from the database.");
-                return Ok(Message);
+                return Ok(Messages);
             }
             catch (Exception ex)
             {

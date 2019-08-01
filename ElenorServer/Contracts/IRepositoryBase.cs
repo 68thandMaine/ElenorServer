@@ -14,7 +14,6 @@ namespace Contracts
         void Update(T entity);
         void Delete(T entity);
 
-        // DB cleanup method
-        void ClearAll(string tableName);
+
     }
 }

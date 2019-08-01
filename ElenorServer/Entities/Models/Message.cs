@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("Message")]
+    [Table("Messages")]
     public class Message
     {
         [Key]
@@ -13,26 +13,26 @@ namespace Entities.Models
 
         [Required(ErrorMessage = "The first name field is required.")]
         [StringLength(20, ErrorMessage = "There can only be 20 characters in the first name.")]
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
 
         [Required(ErrorMessage = "The last name field is required.")]
         [StringLength(40, ErrorMessage = "There can only be 40 characters in the last name.")]
-        public string LastName { get; set; }
+        public virtual string LastName { get; set; }
 
         [Required(ErrorMessage = "The email field is required.")]
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         [Required(ErrorMessage = "The subject field is required.")]
-        public string Subject { get; set; }
+        public virtual string Subject { get; set; }
 
         [Required(ErrorMessage = "The message field is required.")]
         [StringLength(1500, ErrorMessage = "There can only be 1500 characters in a message.")]
-        public string Note { get; set; }
+        public virtual string Note { get; set; }
 
-        public string CreatedAt { get; set; }
+        public virtual string CreatedAt { get; set; }
 
-        public bool Opened { get; set; }
+        public virtual bool Opened { get; set; }
 
-        public bool Replied { get; set; }
+        public virtual bool Replied { get; set; }
     }
 }

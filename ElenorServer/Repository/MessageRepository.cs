@@ -13,25 +13,25 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        public List<Message> GetAllMessages()
+        public virtual List<Message> GetAllMessages()
         {
-            return FindAll().ToList();
+            return FindAll().OrderBy(x => x.CreatedAt).ToList();
         }
 
-        public void CreateMessage(Message message)
+        public virtual void CreateMessage(Message message)
         {
             message.Id = Guid.NewGuid();
             Create(message);
         }
 
-        public Message GetMessageById(Guid Id)
+        public virtual Message GetMessageById(Guid Id)
         {
             return FindByCondition(message => message.Id.Equals(Id))
                 .DefaultIfEmpty(new Message())
                 .FirstOrDefault();
         }
 
-        public void DeleteMessage(Message message)
+        public virtual void DeleteMessage(Message message)
         {
             Delete(message);
         }

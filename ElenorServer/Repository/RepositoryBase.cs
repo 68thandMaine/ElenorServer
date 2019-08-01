@@ -42,13 +42,8 @@ namespace Repository
             this.RepositoryContext.Set<T>().Remove(entity);
         }
 
-        public void ClearAll(string tableName)
-        {
-            this.RepositoryContext.Set<T>().FromSql("REMOVE FROM @tableName", tableName);
-        }
-
         /**
-         *Need to have a function for override equals?
+         *Need to have a function for override equals?Be
          */
 
     }
