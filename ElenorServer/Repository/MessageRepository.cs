@@ -15,7 +15,7 @@ namespace Repository
         }
         public virtual List<Message> GetAllMessages()
         {
-            return FindAll().OrderBy(x => x.CreatedAt).ToList();
+            return FindAll().OrderByDescending(x => x.CreatedAt).ToList();
         }
 
         public virtual void CreateMessage(Message message)
@@ -33,6 +33,7 @@ namespace Repository
 
         public virtual void DeleteMessage(Message message)
         {
+            Console.WriteLine($"DELETE {message}");
             Delete(message);
         }
 

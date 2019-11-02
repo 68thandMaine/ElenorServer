@@ -12,5 +12,6 @@ namespace Entities
         }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<ProfileContent> ProfileContent { get; set;}
     }
 }

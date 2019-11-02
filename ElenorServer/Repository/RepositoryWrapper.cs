@@ -8,6 +8,7 @@ namespace Repository
     {
         private RepositoryContext _repoContext;
         private IMessageRepository _Message;
+        private IProfileContentRepository _Profile;
 
         public IMessageRepository Message
         {
@@ -21,6 +22,17 @@ namespace Repository
             }
         }
 
+        public IProfileContentRepository Profile
+        {
+            get
+            {
+                if (_Profile == null)
+                {
+                    _Profile = new ProfileContentRepository(_repoContext);
+                }
+                return _Profile;
+            }
+        }
 
         public RepositoryWrapper(RepositoryContext repositoryContext)
         {
