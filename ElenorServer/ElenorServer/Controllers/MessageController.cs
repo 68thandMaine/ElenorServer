@@ -73,6 +73,7 @@ namespace ElenorServer.Controllers
         [HttpGet("{id}", Name = "MessageById")]
         public IActionResult GetMessageById(Guid id)
         {
+            Console.WriteLine($"GET {id}");
             try
             {
                 var message = _repository.Message.GetMessageById(id);
@@ -96,7 +97,7 @@ namespace ElenorServer.Controllers
             }
         }
 
-        [HttpDelete("${id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteMessage(Guid id)
         {
             try
@@ -113,6 +114,7 @@ namespace ElenorServer.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Delete");
                 _logger.LogError($"Something went wrong inside DeleteMessage action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
