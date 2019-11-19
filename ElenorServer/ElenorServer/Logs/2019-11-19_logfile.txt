@@ -1,0 +1,1 @@
+2019-11-19 00:23:54.2324 INFO Returned all Message from the database.

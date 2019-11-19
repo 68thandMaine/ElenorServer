@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Contracts;
@@ -13,7 +14,7 @@ namespace Repository
             : base(repositoryContext)
         {
         }
-        public virtual List<Message> GetAllMessages()
+        public virtual IEnumerable<Message> GetAllMessages()
         {
             return FindAll().OrderByDescending(x => x.CreatedAt).ToList();
         }
@@ -27,7 +28,6 @@ namespace Repository
         public virtual Message GetMessageById(Guid Id)
         {
             return FindByCondition(message => message.Id.Equals(Id))
-                .DefaultIfEmpty(new Message())
                 .FirstOrDefault();
         }
 
@@ -37,5 +37,9 @@ namespace Repository
             Delete(message);
         }
 
+        public virtual void UpdateMessage(Message message)
+        {
+            Update(message);
+        }
     }
 }

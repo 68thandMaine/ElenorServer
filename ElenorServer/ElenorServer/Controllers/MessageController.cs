@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
+using Entities.DataTransferObjects;
+using AutoMapper;
+using System.Collections.Generic;
+using Entities.DataTransferObjects.Message;
 using Entities.Models;
-using Repository;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ElenorServer.Controllers
 {
@@ -18,38 +15,39 @@ namespace ElenorServer.Controllers
     {
         private ILoggerManager _logger; // This is the logger dependency. I'm having issues getting the logger to work in the test file.
         private IRepositoryWrapper _repository; // This is the repository dependency
+        private IMapper _mapper;
 
-        public MessageController(ILoggerManager logger, IRepositoryWrapper repository)
+        public MessageController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
         {
             this._logger = logger;
             this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult CreateMessage([FromBody]Message message)
+        public IActionResult CreateMessage([FromBody]MessageForCreationDto message)
         {
             try
             {
-                //if (message.IsObjectNull())
-                //{
-                //    _logger.LogError("The message object sent from the client is null.");
-                //    return BadRequest("The message object is null.");
-                //}
-
+                if (message == null)
+                {
+                    _logger.LogError("The message object sent from the client is null");
+                    return BadRequest("The message object is null");
+                }
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError("The message object sent from the client is invalid.");
                     return BadRequest("The message object is invalid.");
                 }
-
-                _repository.Message.CreateMessage(message);
+                var messageEntity = _mapper.Map<Message>(message);
+                _repository.Message.CreateMessage(messageEntity);
                 _repository.Save();
-
-                return NoContent();
+                var createdMessage = _mapper.Map<MessageDto>(messageEntity);
+                return CreatedAtRoute("MessageById", new { id = createdMessage.Id }, createdMessage);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateMessage action: {ex.Message}.");
+                Console.WriteLine($"Something went wrong inside CreateMessage action: {ex.Message}.");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -59,9 +57,10 @@ namespace ElenorServer.Controllers
         {
             try
             {
-                var Messages = _repository.Message.GetAllMessages();
+                var messages = _repository.Message.GetAllMessages();
                 _logger.LogInfo($"Returned all Message from the database.");
-                return Ok(Messages);
+                var messagesResult = _mapper.Map<IEnumerable<MessageDto>>(messages);
+                return Ok(messagesResult);
             }
             catch (Exception ex)
             {
@@ -73,22 +72,18 @@ namespace ElenorServer.Controllers
         [HttpGet("{id}", Name = "MessageById")]
         public IActionResult GetMessageById(Guid id)
         {
-            Console.WriteLine($"GET {id}");
             try
             {
                 var message = _repository.Message.GetMessageById(id);
 
-                if (message.Id.Equals(Guid.Empty))
+                if (message == null)
                 {
                     _logger.LogError($"Message with id: {id}, has not been found in the database.");
                     return NotFound();
                 }
-
-                else
-                {
-                    _logger.LogInfo($"Returned message with id: {id}");
-                    return Ok(message);
-                }
+                _logger.LogInfo($"Returned message with id: {id}");
+                var messageResult = _mapper.Map<MessageDto>(message);
+                return Ok(messageResult);
             }
             catch (Exception ex)
             {
@@ -103,20 +98,54 @@ namespace ElenorServer.Controllers
             try
             {
                 var message = _repository.Message.GetMessageById(id);
-                //if (message.IsEmptyObject())
-                //{
-                //    _logger.LogError($"Message with id {id}, has not been found in the database");
-                //    return NotFound();
-                //}
+                if (message == null)
+                {
+                    _logger.LogError($"Message with id {id} was not found in the database.");
+                    return NotFound();
+                }
                 _repository.Message.DeleteMessage(message);
                 _repository.Save();
                 return NoContent();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Delete");
                 _logger.LogError($"Something went wrong inside DeleteMessage action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateMessage(Guid id, [FromBody]MessageDto message)
+        {
+            try
+            {
+                if (message == null)
+                {
+                    _logger.LogError("Message object from the client is null.");
+                    return BadRequest("Message object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid Message object sent from client");
+                    return BadRequest("Invalid Message object");
+                }
+
+                var messageEntity = _repository.Message.GetMessageById(id);
+                if (messageEntity == null)
+                {
+                    _logger.LogError($"Message with id: {id} was not found in the db");
+                    return NotFound();
+                }
+                _mapper.Map(message, messageEntity);
+                _repository.Message.UpdateMessage(messageEntity);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateOwner action: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
             }
         }
     }

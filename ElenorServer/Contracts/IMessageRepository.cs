@@ -6,11 +6,10 @@ namespace Contracts
 {
     public interface IMessageRepository : IRepositoryBase<Message>
     {
-        List<Message> GetAllMessages();
+        IEnumerable<Message> GetAllMessages();
         Message GetMessageById(Guid messageId);
         void CreateMessage(Message message);
-        //void UpdateMessage(Message dbMessage, Message message);
-        //void DeleteMessage(Message MessageArray)
+        void UpdateMessage(Message message);
         void DeleteMessage(Message message);
     }
 }

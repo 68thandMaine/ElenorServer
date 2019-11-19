@@ -1,0 +1,10 @@
+2019-11-19 00:23:54.2227 Debug Targets for LoggerService.LoggerManager by level:
+2019-11-19 00:23:54.2241 Debug Trace =>
+2019-11-19 00:23:54.2241 Debug Debug => logfile
+2019-11-19 00:23:54.2241 Debug Info => logfile
+2019-11-19 00:23:54.2241 Debug Warn => logfile
+2019-11-19 00:23:54.2241 Debug Error => logfile
+2019-11-19 00:23:54.2248 Debug Fatal => logfile
+2019-11-19 00:23:54.2965 Debug FileTarget(Name=logfile): Process file '/Users/playourheartout/Documents/Projects/For Friends/Eleno-r/Server/ElenorServer/ElenorServer/2019-11-19_logfile.txt' on startup
+2019-11-19 00:23:54.3158 Debug Creating file appender: /Users/playourheartout/Documents/Projects/For Friends/Eleno-r/Server/ElenorServer/ElenorServer/2019-11-19_logfile.txt
+2019-11-19 00:23:54.3230 Trace Opening /Users/playourheartout/Documents/Projects/For Friends/Eleno-r/Server/ElenorServer/ElenorServer/2019-11-19_logfile.txt with allowFileSharedWriting=False

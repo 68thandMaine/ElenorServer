@@ -34,5 +34,7 @@ namespace Entities.Models
         public virtual bool Opened { get; set; }
 
         public virtual bool Replied { get; set; }
+
+        public virtual string RepliedMessage { get; set; }
     }
 }

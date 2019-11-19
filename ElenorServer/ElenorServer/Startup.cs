@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using System.IO;
 using ElenorServer.Extensions;
+using AutoMapper;
 
 namespace ElenorServer
 {
@@ -41,6 +42,8 @@ namespace ElenorServer
             services.ConfigureRepositoryWrapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
