@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using LoggerService;
 using Contracts;
+using Services;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using Repository;
@@ -50,6 +51,10 @@ namespace ElenorServer.Extensions
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+        public static void ConfigureServices(this IServiceCollection services)
+        {
+            services.AddScoped<IEmailService, EmailService>();
         }
     }
 }

@@ -6,6 +6,9 @@ using AutoMapper;
 using System.Collections.Generic;
 using Entities.DataTransferObjects.Message;
 using Entities.Models;
+using Services;
+using System.Net;
+
 
 namespace ElenorServer.Controllers
 {
@@ -16,12 +19,14 @@ namespace ElenorServer.Controllers
         private ILoggerManager _logger; // This is the logger dependency. I'm having issues getting the logger to work in the test file.
         private IRepositoryWrapper _repository; // This is the repository dependency
         private IMapper _mapper;
+        private IEmailService _emailService;
 
-        public MessageController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper)
+        public MessageController(ILoggerManager logger, IRepositoryWrapper repository, IMapper mapper, IEmailService emailService)
         {
             this._logger = logger;
             this._repository = repository;
             this._mapper = mapper;
+            this._emailService = emailService;
         }
 
         [HttpPost]
@@ -115,7 +120,7 @@ namespace ElenorServer.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateMessage(Guid id, [FromBody]MessageDto message)
+        public IActionResult UpdateMessage(Guid id, [FromBody]Message message)
         {
             try
             {
@@ -137,10 +142,12 @@ namespace ElenorServer.Controllers
                     return NotFound();
                 }
                 _mapper.Map(message, messageEntity);
+                _emailService.SendMessage(message);
+
                 _repository.Message.UpdateMessage(messageEntity);
                 _repository.Save();
 
-                return NoContent();
+                return Ok(messageEntity);
             }
             catch (Exception ex)
             {

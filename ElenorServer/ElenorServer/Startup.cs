@@ -37,6 +37,8 @@ namespace ElenorServer
 
             services.ConfigureLoggerService();
 
+            services.ConfigureServices();
+
             services.ConfigureMySqlContext(Configuration);
 
             services.ConfigureRepositoryWrapper();
